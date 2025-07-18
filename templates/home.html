@@ -10,10 +10,9 @@
     <header>
         <nav>
             <h1>App de Tarefas</h1>
-            <a href="">Login</a>
+            <a href="{{url_for('login')}}">Login</a>
         </nav>
     </header>
-
     <main>
         <div class="direita">
             <p>
@@ -38,9 +37,10 @@
                 <p><strong>GitHub:</strong><a class="git" href="https://github.com/felipeab-b" target="_blank">@felipeab-b</a></p>
                 <p><strong>LinkedIn:</strong><a href="https://linkedin.com/in/felipe-avelar-819030263" target="_blank">Felipe Avelar</a></p>
             </div>
-            <button>L o g i n</button>
+            <form action="{{url_for('login')}}" method="get">
+                <button>L o g i n</button>
+            </form>
         </div>
     </main>
-
 </body>
 </html>
