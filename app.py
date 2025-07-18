@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-from db.datarecord import load_users
+from db.datarecord import load_users, save_users
 
 app = Flask(__name__)
 app.secret_key = 'segredo'
@@ -39,6 +39,27 @@ def dashboard():
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
+@app.route('/registro', methods=['GET', 'POST'])
+def registro():
+    if request.method == 'POST':
+        user = request.form['user']
+        password = request.form['password']
+        users = load_users()
+
+        if user in users:
+            return 'Usuário já existe!'
+        else:
+            # === Escreve os novos dados no json, que foi transformado em dict pelo metodo load ===
+            users[user] = {
+                'username':user,
+                'password':password
+            }
+            # === Salva os novos dados do dict, e transforma de volta para json ===
+            save_users(users)
+            return redirect(url_for('login'))
+
+    return render_template("registro.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
