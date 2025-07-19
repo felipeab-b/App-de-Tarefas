@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Tarefas</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/dash.css')}}">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>App de Tarefas</h1>
+            <a href="{{url_for('logout')}}">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <div class="text">
+            <h1>Bem vindo, {{user}} <span id="randomEmoji"></span></h1>
+            <h1><a href="{{url_for('stats')}}">Veja suas estatísticas aqui 🪄</a></h1>
+        </div>
+
+        <div class="week-container">
+            <div class="day-card">
+                <h2>Segunda-feira</h2>
+                <span class="day-num"></span>
+            </div>
+            <div class="day-card">
+                <h2>Terça-feira</h2>
+                <span class="day-num"></span>
+            </div>
+            <div class="day-card">
+                <h2>Quarta-feira</h2>
+                <span class="day-num"></span>
+            </div>
+            <div class="day-card">
+                <h2>Quinta-feira</h2>
+                <span class="day-num"></span>
+            </div>
+            <div class="day-card">
+                <h2>Sexta-feira</h2>
+                <span class="day-num"></span>
+            </div>
+            <div class="day-card">
+                <h2>Sábado</h2>
+                <span class="day-num"></span>
+            </div>
+            <div class="day-card">
+                <h2>Domingo</h2>
+                <span class="day-num"></span>
+            </div>
+        </div>
+
+        <div class="tasks-container">
+            <div class="cards-task">
+                {% for task in tasks %}
+                    <div class="card-task">
+                        <p>teste</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="resume-day">
+                <p>RESUME</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="{{url_for('static', filename='js/dash.js')}}"></script>
+</body>
+</html>

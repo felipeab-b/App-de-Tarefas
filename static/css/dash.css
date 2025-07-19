@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #e0d9d9de;
+}
+
+header {
+    background: #bbb5b5de;
+    box-shadow: 0 2px 10px rgba(21, 21, 21, 0.1);
+    padding: 1rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    display: flex;
+    list-style: none;
+    margin-right: 0.5rem;
+    text-decoration: none;
+    color: #111;
+}
+
+a:hover {
+    color: #393737;
+}
+
+main {
+    padding: 2rem;
+}
+
+.text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text a:hover {
+    cursor: pointer;
+    color: #545151;
+}
+
+.week-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.day-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.day-card:hover {
+    transform: translateY(-5px);
+}
+
+.day-card h2 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.day-card.today {
+    background: #16df234b;
+    border: 1px solid #16df234b;;
+}
+
+.day-num {
+    font-size: 2rem;
+    color: #6d6c6cd5;
+    font-weight: normal;
+}
+
+.day-card.today .day-num {
+    color: #000408;
+}
+
+.tasks-container {
+    display: flex;
+    justify-content: space-between;
+    height: calc(100vh - 318px);
+    margin-top: 2rem;
+    background: #bbb5b5de;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(21, 21, 21, 0.1);
+    padding: 1.5rem;
+}
+
+.cards-task {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.card-task {
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 10px rgba(21, 21, 21, 0.1);
+}

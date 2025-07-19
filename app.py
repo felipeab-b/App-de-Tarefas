@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-from db.datarecord import load_users, save_users
+from db.datarecord import load_users, save_users, load_tasks
 
 app = Flask(__name__)
 app.secret_key = 'segredo'
@@ -33,7 +33,12 @@ def dashboard():
     # === Verifica se o user tem uma session, portanto está logado, e caso não, retorna o login ===
     if 'user' not in session:
         return redirect(url_for('login'))
-    return f"sucesso {session['user']}"
+    
+    user = session['user']
+    tasks = load_tasks()
+    tasks_user = tasks.get(user, [])
+
+    return render_template("dashboard.html", user=user, tasks=tasks_user)
 
 @app.route('/logout')
 def logout():
@@ -60,6 +65,10 @@ def registro():
             return redirect(url_for('login'))
 
     return render_template("registro.html")
+
+@app.route('/stats')
+def stats():
+    return 'stats'
 
 if __name__ == "__main__":
     app.run(debug=True)
