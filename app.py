@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-from db.datarecord import load_users, save_users, load_tasks
+from db.datarecord import load_users, save_users, load_tasks, save_tasks
 
 app = Flask(__name__)
 app.secret_key = 'segredo'
@@ -28,7 +28,7 @@ def login():
     # === Resultado da requisição GET
     return render_template("login.html")
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     # === Verifica se o user tem uma session, portanto está logado, e caso não, retorna o login ===
     if 'user' not in session:
@@ -37,6 +37,16 @@ def dashboard():
     user = session['user']
     tasks = load_tasks()
     tasks_user = tasks.get(user, [])
+
+    if request.method == 'POST':
+        task = request.form['add']
+        feito = False
+        tasks[user].append({
+            'title':task,
+            'feito':feito
+        })
+        save_tasks(tasks)
+        return redirect(url_for('dashboard'))
 
     return render_template("dashboard.html", user=user, tasks=tasks_user)
 

@@ -54,13 +54,34 @@
             <div class="cards-task">
                 {% for task in tasks %}
                     <div class="card-task">
-                        <p>teste</p>
+                        <h3>
+                            {% if task.feito %}
+                                <s><h3>{{task.title}}</h3></s>
+                            {% else %}
+                                {{task.title}}
+                            {% endif %}
+                        </h3>
+                        <div class="btns-task">
+                            <button>Editar</button>
+                                <button>
+                                    {% if task.feito %}
+                                    Desfazer
+                                    {% else %}
+                                    Feito
+                                    {% endif %}
+                                </button>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
             <div class="resume-day">
                 <p>RESUME</p>
             </div>
+            <form class="add-task" method="POST">
+                <h3>Adicionar Tarefas:</h3>
+                <input type="text" name="add" placeholder="Nome">
+                <button>Adiconar</button>
+            </form>
         </div>
 
     </main>
