@@ -53,23 +53,20 @@
         <div class="tasks-container">
             <div class="cards-task">
                 {% for task in tasks %}
-                    <div class="card-task">
-                        <h3>
-                            {% if task.feito %}
-                                <s><h3>{{task.title}}</h3></s>
-                            {% else %}
-                                {{task.title}}
-                            {% endif %}
-                        </h3>
+                    <div class="card-task {% if task.feito %}feito{% endif %}">
+                        <h3>{{task.title}}</h3>
                         <div class="btns-task">
-                            <button>Editar</button>
-                                <button>
+                            <button class="btnOpen" data-index="{{loop.index0}}">Editar</button>
+                            <form method="POST" action="{{ url_for('feito') }}">
+                                <input type="hidden" name="task_idx" value=" {{loop.index0}}">
+                                <button type="submit">
                                     {% if task.feito %}
                                     Desfazer
                                     {% else %}
                                     Feito
                                     {% endif %}
                                 </button>
+                            </form>
                         </div>
                     </div>
                 {% endfor %}
@@ -85,6 +82,22 @@
         </div>
 
     </main>
+
+    <div id="popup" style="display: none;" class="popup">
+        <div class="popup-content">
+            <h3>Editar Tarefa:</h3>
+            <form method="POST" action="/editar" class="trocar-nome">
+                <input type="hidden" name="task-idx" id="popup-idx1">
+                <input type="text" placeholder="Novo Nome" name="input-new-name">
+                <button type="submit">Alterar</button>
+            </form>
+            <form method="POST" action="/apagar">
+                <input type="hidden" name="task-idx" id="popup-idx2">
+                <button type="submit" class="btn-apagar">Apagar Tarefa</button>
+            </form>
+            <button id="btnClose">Cancelar</button>
+        </div>
+    </div>
 
     <script src="{{url_for('static', filename='js/dash.js')}}"></script>
 </body>

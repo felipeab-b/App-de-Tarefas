@@ -48,3 +48,22 @@ document.addEventListener("DOMContentLoaded", function() { //Evento que dispara 
     });
 
 });
+
+
+const popup = document.getElementById('popup');
+
+//Ao clicar muda o style display para a div ser visível na página
+document.querySelectorAll('.btnOpen').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const idx = btn.dataset.index;
+        document.getElementById('popup-idx1').value = idx;
+        document.getElementById('popup-idx2').value = idx;
+
+        popup.style.display = 'flex'
+    });
+});
+
+//Volta ao display none(invisível)
+btnClose.addEventListener('click', () => {
+    popup.style.display = 'none';
+  });

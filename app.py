@@ -50,6 +50,54 @@ def dashboard():
 
     return render_template("dashboard.html", user=user, tasks=tasks_user)
 
+@app.route('/feito', methods=['POST'])
+def feito():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    user = session['user']
+    tasks = load_tasks()
+    # === Pega do form o valor do index da tarefa ===
+    task_index = int(request.form['task_idx'])
+
+    # === Verifica se o user existe no json das taks e se o idx é válido ===
+    if user in tasks and 0 <= task_index < len(tasks[user]):
+        tasks[user][task_index]['feito'] = not tasks[user][task_index]['feito']
+        save_tasks(tasks)
+
+    return redirect(url_for('dashboard'))
+
+@app.route('/apagar', methods=['POST'])
+def apagar():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    user = session['user']
+    tasks = load_tasks()
+    index = int(request.form['task-idx'])
+
+    if user in tasks and 0 <= index < len(tasks[user]):
+        tasks[user].pop(index)
+        save_tasks(tasks)
+
+    return redirect(url_for('dashboard'))
+
+@app.route('/editar', methods=['POST'])
+def editar_nome():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    user = session['user']
+    tasks = load_tasks()
+    new_title = request.form['input-new-name']
+    index = int(request.form['task-idx'])
+
+    if user in tasks and 0 <= index < len(tasks[user]):
+        tasks[user][index]['title'] = new_title
+        save_tasks(tasks)
+
+    return redirect(url_for('dashboard'))
+
 @app.route('/logout')
 def logout():
     session.clear()

@@ -1,15 +1,11 @@
 {
-    "felipe": [
+    "Felipe": [
         {
-            "title": "Estudar",
+            "title": "Estudo",
             "feito": false
         },
         {
             "title": "Academia",
-            "feito": true
-        },
-        {
-            "title": "teste",
             "feito": false
         }
     ]
