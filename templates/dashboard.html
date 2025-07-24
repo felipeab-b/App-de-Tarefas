@@ -59,7 +59,7 @@
                             <button class="btnOpen" data-index="{{loop.index0}}">Editar</button>
                             <form method="POST" action="{{ url_for('feito') }}">
                                 <input type="hidden" name="task_idx" value=" {{loop.index0}}">
-                                <button type="submit">
+                                <button type="button" class="btn-feito" data-feito="{{ task.feito|lower }}">
                                     {% if task.feito %}
                                     Desfazer
                                     {% else %}
@@ -72,7 +72,22 @@
                 {% endfor %}
             </div>
             <div class="resume-day">
-                <p>RESUME</p>
+                <h2>Resumo de Tarefas</h2>
+                <div class="circle">
+                    <svg class="circle-svg" viewBox="0 0 36 36">
+                        <path class="bg" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        <path class="progress" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                            stroke-dasharray="{{ porcentagem }}, 100"/>
+                    </svg>
+                    <div class="circle-text">
+                        <span>{{ feitas }}/{{ total }}</span>
+                        <span>{{ porcentagem }}%</span>
+                    </div>
+                </div>
             </div>
             <form class="add-task" method="POST">
                 <h3>Adicionar Tarefas:</h3>
@@ -80,7 +95,6 @@
                 <button>Adiconar</button>
             </form>
         </div>
-
     </main>
 
     <div id="popup" style="display: none;" class="popup">

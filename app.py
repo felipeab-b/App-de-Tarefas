@@ -48,7 +48,11 @@ def dashboard():
         save_tasks(tasks)
         return redirect(url_for('dashboard'))
 
-    return render_template("dashboard.html", user=user, tasks=tasks_user)
+    total_de_tasks = len(tasks_user)
+    total_de_feitas = sum(1 for t in tasks_user if t.get('feito'))
+    porcentagem = int((total_de_feitas/total_de_tasks) * 100) if total_de_tasks > 0 else 0
+
+    return render_template("dashboard.html", user=user, tasks=tasks_user, total=total_de_tasks, feitas=total_de_feitas,porcentagem=porcentagem)
 
 @app.route('/feito', methods=['POST'])
 def feito():

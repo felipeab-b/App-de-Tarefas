@@ -47,6 +47,26 @@ document.addEventListener("DOMContentLoaded", function() { //Evento que dispara 
         card.style.backgroundColor = cor;
     });
 
+    const botoes = document.querySelectorAll('.btn-feito');
+
+    botoes.forEach(botao => {
+        botao.addEventListener('click', () => {
+            const form = botao.closest('form');
+            const estaFeito = botao.dataset.feito === 'true';
+
+            if (!estaFeito) {
+                explosaoFeito(botao);
+                setTimeout(() => {
+                    form.submit();
+                }, 500);
+            }
+            else {
+                setTimeout(() => {
+                    form.submit();
+                }, 100);
+            }
+        });
+    });
 });
 
 
@@ -67,3 +87,33 @@ document.querySelectorAll('.btnOpen').forEach(btn => {
 btnClose.addEventListener('click', () => {
     popup.style.display = 'none';
   });
+
+
+function explosaoFeito(btn) {
+    const emojis = ["✅", "💥", "🔥"];
+
+    for (let i = 0; i < 200; i++) {
+        const emoji = document.createElement('span');
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.classList.add('emoji');
+
+        const x = window.innerWidth / 2;
+        const y = window.innerHeight / 2;
+
+        emoji.style.left = `${x}px`;
+        emoji.style.top = `${y}px`;
+
+        const angle = Math.random() * 2 * Math.PI;
+        const radius = Math.random() * Math.max(window.innerWidth, window.innerHeight);
+
+        const dx = Math.cos(angle) * radius;
+        const dy = Math.sin(angle) * radius;
+
+        emoji.style.setProperty('--dx', `${dx}px`);
+        emoji.style.setProperty('--dy', `${dy}px`);
+
+        document.body.appendChild(emoji);
+    };
+}
+
+
